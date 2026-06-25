@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Sweet Crumbs Bakery</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .contact-hero {
+      position: relative;
+      background: linear-gradient(135deg, #1a0a00, #5c2200);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .contact-hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=1400&q=80') center/cover no-repeat;
+      opacity: 0.2;
+    }
+    .contact-hero-content { position: relative; }
+    .contact-hero h1 { font-family: var(--font-heading); font-size: 2.8rem; margin-bottom: 0.6rem; }
+    .contact-hero p  { opacity: 0.85; font-size: 1.05rem; }
+
+    /* Quick contact strip */
+    .contact-strip {
+      background: var(--red); color: #fff;
+      padding: 1.5rem;
+    }
+    .contact-strip-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; text-align: center;
+    }
+    .strip-item i  { font-size: 1.3rem; margin-bottom: 0.4rem; display: block; opacity: 0.85; }
+    .strip-item strong { display: block; font-size: 0.9rem; }
+    .strip-item span   { font-size: 0.82rem; opacity: 0.8; }
+
+    /* Main contact layout */
+    .contact-page { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .contact-grid {
+      display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; align-items: start;
+    }
+
+    /* Form card */
+    .form-card {
+      background: #fff; border-radius: 14px;
+      padding: 2.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+    }
+    .form-card h2 {
+      font-family: var(--font-heading); font-size: 1.6rem;
+      color: var(--navy); margin-bottom: 0.4rem;
+    }
+    .form-card p  { font-size: 0.9rem; color: #777; margin-bottom: 1.8rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group select {
+      width: 100%; padding: 0.6rem 0.85rem;
+      border: 1px solid #ccc; border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 0.95rem;
+      background: #fff; cursor: pointer;
+    }
+    .form-group select:focus { outline: none; border-color: var(--red); }
+
+    .submit-btn {
+      width: 100%; padding: 0.85rem;
+      background: var(--red); color: #fff;
+      border: none; border-radius: var(--radius);
+      font-size: 1rem; font-family: var(--font-body);
+      cursor: pointer; font-weight: bold;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background: #a93226; transform: translateY(-1px); }
+
+    /* Success message (hidden by default) */
+    .form-success {
+      display: none;
+      background: #d5f5e3;
+      border: 1px solid #27ae60;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      color: #1e8449;
+      font-size: 0.93rem;
+      margin-top: 1rem;
+    }
+
+    /* Info sidebar */
+    .info-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-card {
+      background: #fff; border-radius: 14px;
+      padding: 1.8rem; box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    .info-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem; color: var(--navy);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .info-card h3 i { color: var(--red); }
+    .info-card address, .info-card p {
+      font-size: 0.9rem; color: #555; line-height: 1.85; font-style: normal;
+    }
+    .info-card a { color: var(--red); }
+    .info-card a:hover { text-decoration: underline; }
+
+    /* Hours table */
+    .hours-table { width: 100%; font-size: 0.88rem; }
+    .hours-table td { padding: 0.45rem 0; border-bottom: 1px solid #f0f0f0; color: #555; }
+    .hours-table td:last-child { text-align: right; font-weight: bold; color: var(--navy); }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .open-badge {
+      display: inline-block;
+      background: #d5f5e3; color: #1e8449;
+      font-size: 0.72rem; font-weight: bold;
+      padding: 0.15rem 0.55rem; border-radius: 50px;
+      margin-left: 0.4rem;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      width: 100%; height: 200px;
+      background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.5rem;
+      color: #888; font-size: 0.9rem;
+    }
+    .map-placeholder i { font-size: 2rem; color: var(--red); }
+
+    /* FAQ */
+    .faq-section { margin-top: 4rem; }
+    .faq-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem; color: var(--navy); margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .faq-item {
+      background: var(--cream); border-radius: 10px;
+      padding: 1.3rem 1.5rem; border-left: 4px solid var(--red);
+    }
+    .faq-item h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .faq-item p  { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-strip-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .faq-grid  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🥐</div>
+        <div class="logo-text">Sweet <span>Crumbs</span></div>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contact-hero">
+    <div class="contact-hero-bg"></div>
+    <div class="contact-hero-content">
+      <h1>Get in Touch</h1>
+      <p>Questions, custom orders, or just a hello we'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- QUICK STRIP -->
+  <div class="contact-strip">
+    <div class="contact-strip-inner">
+      <div class="strip-item">
+        <i class="fa fa-phone"></i>
+        <strong>0131 456 7890</strong>
+        <span>Call us during opening hours</span>
+      </div>
+      <div class="strip-item">
+        <i class="fa fa-envelope"></i>
+        <strong>hello@sweetcrumbs.co.uk</strong>
+        <span>We reply within 24 hours</span>
+      </div>
+      <div class="strip-item">
+        <i class="fa fa-location-dot"></i>
+        <strong>12 Baker Street, Edinburgh</strong>
+        <span>EH1 1AB</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-page">
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div class="form-card">
+        <h2>Send Us a Message</h2>
+        <p>Fill in the form below and we'll get back to you within one working day.</p>
+
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="fname" placeholder="e.g. Claire" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" name="lname" placeholder="e.g. Mackenzie" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number (optional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. 0131 000 0000" />
+          </div>
+
+          <div class="form-group">
+            <label for="enquiry">Enquiry Type *</label>
+            <select id="enquiry" name="enquiry" required>
+              <option value="" disabled selected>Select a topic…</option>
+              <option value="custom-cake">Custom Cake Order</option>
+              <option value="catering">Corporate / Catering Order</option>
+              <option value="product">Product Question</option>
+              <option value="feedback">Feedback</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="Tell us what you need the more detail the better, especially for custom orders." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fa fa-paper-plane"></i> &nbsp; Send Message
+          </button>
+
+          <div class="form-success" id="form-success">
+            <i class="fa fa-circle-check"></i> &nbsp; <strong>Message sent!</strong> We'll get back to you within one working day. Thank you!
+          </div>
+        </form>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="info-sidebar">
+
+        <div class="info-card">
+          <h3><i class="fa fa-location-dot"></i> Visit Us</h3>
+          <div class="map-placeholder" style="padding: 0; overflow: hidden; height: 250px;">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.612198083333!2d-76.7793425!3d17.9957458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb3f9043c63d1b%3A0x2cdfebad26377749!2sBaker%20St%2C%20Kingston%2C%20Jamaica!5e0!3m2!1sen!2sjm!4v1719339726000!5m2!1sen!2sjm"                  width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <address style="margin-top:1rem;">
+            12 Baker Street<br>Edinburgh, EH1 1AB<br><br>
+            Nearest bus stop: Baker St (2 min walk)<br>
+            Parking available on George Street (5 min walk)
+          </address>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fa fa-clock"></i> Opening Hours</h3>
+          <table class="hours-table">
+            <tr><td>Monday</td>    <td>7:00am – 6:00pm <span class="open-badge">Open</span></td></tr>
+            <tr><td>Tuesday</td>   <td>7:00am – 6:00pm</td></tr>
+            <tr><td>Wednesday</td> <td>7:00am – 6:00pm</td></tr>
+            <tr><td>Thursday</td>  <td>7:00am – 6:00pm</td></tr>
+            <tr><td>Friday</td>    <td>7:00am – 6:00pm</td></tr>
+            <tr><td>Saturday</td>  <td>8:00am – 5:00pm</td></tr>
+            <tr><td>Sunday</td>    <td>9:00am – 2:00pm</td></tr>
+          </table>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fab fa-instagram"></i> Follow Us</h3>
+          <p>See what's fresh each day on our Instagram. We post new items, seasonal specials, and behind-the-scenes baking.</p>
+          <a href="#" class="btn btn-outline" style="margin-top:0.8rem;display:inline-block;padding:0.45rem 1.1rem;font-size:0.88rem;">
+            @sweetcrumbsbakery
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>How far in advance do I need to order a custom cake?</h4>
+          <p>We ask for at least 48 hours' notice. For large or elaborate designs, a week ahead is better. Contact us to discuss your requirements.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you deliver?</h4>
+          <p>We currently don't offer delivery, but click-and-collect is available. Order by phone or email and pick up at the shop at your chosen time.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you cater for allergies or dietary requirements?</h4>
+          <p>We can accommodate some requirements with advance notice. Please speak to us before ordering we cannot guarantee allergen-free products.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you do corporate or event orders?</h4>
+          <p>Yes we regularly supply offices, events, and school functions. Get in touch with your numbers and requirements and we'll put together a quote.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sweet Crumbs Bakery</h4>
+        <p>Fresh baked every morning.<br>Made with love, served with pride.</p>
+        <div style="margin-top:1rem;display:flex;gap:0.7rem;">
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-facebook"></i></a>
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <address>
+          12 Baker Street<br>Edinburgh, EH1 1AB<br><br>
+          <i class="fa fa-phone"></i> &nbsp;0131 456 7890<br>
+          <i class="fa fa-envelope"></i> &nbsp;hello@sweetcrumbs.co.uk
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon – Fri: &nbsp;7:00am – 6:00pm<br>
+           Saturday: &nbsp;8:00am – 5:00pm<br>
+           Sunday: &nbsp;&nbsp;&nbsp;9:00am – 2:00pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sweet Crumbs Bakery. All rights reserved.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Form submission simulation
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const inputs = form.querySelectorAll('[required]');
+        let valid = true;
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            input.style.borderColor = '#c0392b';
+            valid = false;
+          } else {
+            input.style.borderColor = '#ccc';
+          }
+        });
+        if (valid) {
+          success.style.display = 'block';
+          form.reset();
+          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

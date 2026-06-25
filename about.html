@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Sweet Crumbs Bakery</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .about-hero {
+      position: relative;
+      background: linear-gradient(135deg, #1a0a00, #5c2200);
+      padding: 5.5rem 1.5rem 4.5rem;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .about-hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1400&q=80') center/cover no-repeat;
+      opacity: 0.2;
+    }
+    .about-hero-content { position: relative; }
+    .about-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .about-hero p { opacity: 0.85; font-size: 1.05rem; }
+
+    /* Story section */
+    .story-section { padding: 5rem 0; background: var(--cream); }
+    .story-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .story-img {
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    }
+    .story-img img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .story-text .eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--red); font-weight: bold; margin-bottom: 0.6rem; display: block;
+    }
+    .story-text h2 {
+      font-family: var(--font-heading); font-size: 2rem;
+      color: var(--navy); margin-bottom: 1.2rem; line-height: 1.3;
+    }
+    .story-text p {
+      color: #555; line-height: 1.8; font-size: 0.97rem; margin-bottom: 1rem;
+    }
+
+    /* Timeline */
+    .timeline { margin: 2rem 0; }
+    .timeline-item {
+      display: flex; gap: 1.2rem; margin-bottom: 1.2rem; align-items: flex-start;
+    }
+    .timeline-year {
+      background: var(--red); color: #fff;
+      font-size: 0.8rem; font-weight: bold;
+      padding: 0.3rem 0.7rem; border-radius: 6px;
+      white-space: nowrap; margin-top: 0.15rem;
+      min-width: 52px; text-align: center;
+    }
+    .timeline-item p { font-size: 0.9rem; color: #555; line-height: 1.5; }
+
+    /* Values */
+    .values-section { background: var(--navy); padding: 5rem 0; color: #fff; }
+    .values-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .values-header { text-align: center; margin-bottom: 3rem; }
+    .values-header h2 {
+      font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem;
+    }
+    .values-header p { opacity: 0.7; }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; }
+    .value-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.8rem;
+      transition: background 0.2s;
+    }
+    .value-card:hover { background: rgba(255,255,255,0.1); }
+    .value-icon {
+      font-size: 2rem; margin-bottom: 1rem; display: block;
+    }
+    .value-card h3 {
+      font-family: var(--font-heading); font-size: 1.1rem;
+      margin-bottom: 0.6rem; color: var(--brown);
+    }
+    .value-card p { font-size: 0.88rem; opacity: 0.72; line-height: 1.65; }
+
+    /* Team */
+    .team-section { padding: 5rem 0; background: #fff; }
+    .team-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .team-header { text-align: center; margin-bottom: 3rem; }
+    .team-header h2 {
+      font-family: var(--font-heading); font-size: 2rem; color: var(--navy);
+    }
+    .team-header p { color: #777; margin-top: 0.4rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .team-card {
+      text-align: center;
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+      transition: transform 0.25s;
+    }
+    .team-card:hover { transform: translateY(-5px); }
+    .team-avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.2rem;
+      border: 4px solid var(--red);
+      display: block;
+    }
+    .team-avatar-placeholder {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      margin: 0 auto 1.2rem;
+      border: 4px solid var(--light);
+    }
+    .team-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem; color: var(--navy); margin-bottom: 0.25rem;
+    }
+    .team-card .role {
+      font-size: 0.82rem; color: var(--red); font-weight: bold;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem;
+    }
+    .team-card p { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .story-inner { grid-template-columns: 1fr; }
+      .story-img img { height: 260px; }
+      .values-grid, .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🥐</div>
+        <div class="logo-text">Sweet <span>Crumbs</span></div>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-content">
+      <h1>About Us</h1>
+      <p>Twelve years of early mornings, flour-dusted aprons, and baking with heart.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="story-inner">
+      <div class="story-img">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80" alt="Baker at work" />
+      </div>
+      <div class="story-text">
+        <span class="eyebrow">Our Story</span>
+        <h2>Started small. Still baking the same way.</h2>
+        <p>Sweet Crumbs Bakery opened its doors in 2012 with one oven, two bakers, and a firm belief that good bread should never be rushed. What began as a passion project quickly became a fixture in the local community.</p>
+        <p>We haven't changed the recipes. We haven't outsourced the baking. Every loaf, every pastry, and every cake is still made by hand in our Edinburgh kitchen the same way it was on day one.</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-year">2012</span>
+            <p>Sweet Crumbs opens on Baker Street with a sourdough loaf and a dream.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2015</span>
+            <p>Pastry range introduced. The croissant becomes an instant bestseller.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2018</span>
+            <p>Custom cake orders launched after customers kept asking for celebrations cakes.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">2024</span>
+            <p>Seating added inside the shop. People stay longer. That feels right.</p>
+          </div>
+        </div>
+
+        <a href="menu.html" class="btn btn-primary">See What We Bake &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="values-inner">
+      <div class="values-header">
+        <h2>What we stand for</h2>
+        <p>Three principles that guide everything we do.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-icon">🌾</span>
+          <h3>Freshness</h3>
+          <p>Nothing leaves our kitchen more than a few hours old. We bake through the night so your morning starts with something genuinely fresh.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">🤝</span>
+          <h3>Community</h3>
+          <p>We source locally where we can, we know our regulars by name, and we sponsor the local school bake sale every year. This bakery belongs to the neighbourhood.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">⭐</span>
+          <h3>Quality</h3>
+          <p>We use real butter, fresh eggs, and flour from a Scottish mill. No shortcuts. If we wouldn't eat it ourselves, it doesn't go on the shelf.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="team-inner">
+      <div class="team-header">
+        <h2>Meet the team</h2>
+        <p>The people behind every loaf, pastry, and celebration cake.</p>
+      </div>
+      <div class="team-grid">
+
+        <div class="team-card">
+          <div class="team-avatar-placeholder">👩‍🍳</div>
+          <h3>Claire Mackenzie</h3>
+          <div class="role">Head Baker &amp; Founder</div>
+          <p>Claire started Sweet Crumbs in 2012 after training at a French patisserie. She still bakes the sourdough herself every morning and wouldn't have it any other way.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-placeholder">👨‍🍳</div>
+          <h3>James O'Brien</h3>
+          <div class="role">Pastry Chef</div>
+          <p>James is responsible for the croissants and the rotating Danish pastry fillings. He's perfected his lamination technique over 8 years and it shows.</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-placeholder">👩‍🎂</div>
+          <h3>Priya Sharma</h3>
+          <div class="role">Cake Decorator</div>
+          <p>Priya handles all the custom cake orders. Her attention to detail is remarkable she can turn any brief into something beautiful within 48 hours.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" style="background:linear-gradient(135deg,var(--navy) 0%,#1a2940 100%);padding:4rem 1.5rem;text-align:center;color:#fff;">
+    <h2 style="font-family:var(--font-heading);font-size:2rem;margin-bottom:0.75rem;">Want to get in touch?</h2>
+    <p style="opacity:0.78;max-width:480px;margin:0 auto 2rem;">We'd love to hear from you whether it's a custom cake enquiry or just a hello.</p>
+    <a href="contact.html" class="btn btn-secondary" style="font-size:1rem;padding:0.75rem 2rem;">Contact Us &nbsp;<i class="fa fa-envelope"></i></a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sweet Crumbs Bakery</h4>
+        <p>Fresh baked every morning.<br>Made with love, served with pride.</p>
+        <div style="margin-top:1rem;display:flex;gap:0.7rem;">
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-facebook"></i></a>
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <address>
+          12 Baker Street<br>Edinburgh, EH1 1AB<br><br>
+          <i class="fa fa-phone"></i> &nbsp;0131 456 7890<br>
+          <i class="fa fa-envelope"></i> &nbsp;hello@sweetcrumbs.co.uk
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon – Fri: &nbsp;7:00am – 6:00pm<br>
+           Saturday: &nbsp;8:00am – 5:00pm<br>
+           Sunday: &nbsp;&nbsp;&nbsp;9:00am – 2:00pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sweet Crumbs Bakery. All rights reserved.</div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

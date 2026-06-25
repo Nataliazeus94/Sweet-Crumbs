@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu – Sweet Crumbs Bakery</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .menu-hero {
+      position: relative;
+      background: linear-gradient(135deg, #2c1005 0%, #5c2200 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .menu-hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=1400&q=80') center/cover no-repeat;
+      opacity: 0.25;
+    }
+    .menu-hero-content { position: relative; }
+    .menu-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .menu-hero p { opacity: 0.85; font-size: 1.05rem; }
+
+    /* Category tabs */
+    .menu-tabs {
+      background: #fff;
+      border-bottom: 2px solid #eee;
+      position: sticky;
+      top: 65px;
+      z-index: 50;
+    }
+    .tabs-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .tab-link {
+      padding: 1rem 1.5rem;
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .tab-link:hover, .tab-link.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    /* Menu sections */
+    .menu-page { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .menu-category { margin-bottom: 4rem; }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--light);
+    }
+    .category-icon {
+      width: 52px; height: 52px;
+      background: var(--red);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .category-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      color: var(--navy);
+    }
+    .category-header p { font-size: 0.9rem; color: #888; }
+
+    /* Menu item cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .menu-item {
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .menu-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.11);
+    }
+    .item-img {
+      width: 80px; height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .item-info { flex: 1; }
+    .item-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .item-info p  { font-size: 0.84rem; color: #777; line-height: 1.45; }
+    .item-tags    { display: flex; gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
+    .item-tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+      background: var(--light);
+      color: #666;
+    }
+    .item-tag.vegan  { background: #d5f5e3; color: #1e8449; }
+    .item-tag.gf     { background: #fdebd0; color: #ca6f1e; }
+    .item-price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--red);
+      white-space: nowrap;
+      padding-left: 0.5rem;
+    }
+
+    /* Specials table */
+    .specials-note {
+      background: var(--light);
+      border-left: 4px solid var(--brown);
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Allergen box */
+    .allergen-box {
+      background: var(--navy);
+      color: #ccc;
+      border-radius: 10px;
+      padding: 1.5rem 1.8rem;
+      margin-top: 2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .allergen-box h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🥐</div>
+        <div class="logo-text">Sweet <span>Crumbs</span></div>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html" class="active">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="menu-hero">
+    <div class="menu-hero-bg"></div>
+    <div class="menu-hero-content">
+      <h1>Our Menu</h1>
+      <p>Everything made fresh from scratch, every single morning. No exceptions.</p>
+    </div>
+  </section>
+
+  <!-- CATEGORY TABS -->
+  <div class="menu-tabs">
+    <div class="tabs-inner">
+      <a href="#breads"    class="tab-link active">🍞 &nbsp;Breads</a>
+      <a href="#pastries"  class="tab-link">🥐 &nbsp;Pastries</a>
+      <a href="#cakes"     class="tab-link">🎂 &nbsp;Cakes &amp; Specials</a>
+      <a href="#drinks"    class="tab-link">☕ &nbsp;Drinks</a>
+    </div>
+  </div>
+
+  <div class="menu-page">
+
+    <!-- BREADS -->
+    <div class="menu-category" id="breads">
+      <div class="category-header">
+        <div class="category-icon">🍞</div>
+        <div>
+          <h2>Breads</h2>
+          <p>Slow fermented, hand shaped, and stone baked daily.</p>
+        </div>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=200&q=80" alt="Sourdough" />
+          <div class="item-info">
+            <h3>Classic Sourdough Loaf</h3>
+            <p>24-hour ferment, crispy crust, open crumb. Available as full or half loaf.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£4.50</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&q=80" alt="Seeded Loaf" />
+          <div class="item-info">
+            <h3>Seeded Wholegrain Loaf</h3>
+            <p>Mixed seeds, 100% wholegrain flour. Hearty and nutritious.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£3.80</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1598373182133-52452f7691ef?w=200&q=80" alt="Focaccia" />
+          <div class="item-info">
+            <h3>Rosemary Focaccia</h3>
+            <p>Olive oil, sea salt, fresh rosemary. Sold by the square perfect for sharing.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£2.90</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1598373182308-3270495d2f58?w=400&q=80" alt="White Tin Loaf" />
+          <div class="item-info">
+            <h3>Classic White Tin Loaf</h3>
+            <p>Soft crumb, golden crust. The family staple sliced on request.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£2.50</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" alt="Rye Bread" />
+          <div class="item-info">
+            <h3>Dark Rye Bread</h3>
+            <p>Dense, tangy, and deeply flavourful. Pairs perfectly with smoked salmon.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£4.20</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=200&q=80" alt="Rolls" />
+          <div class="item-info">
+            <h3>Bread Rolls (pack of 4)</h3>
+            <p>Crusty outside, soft inside. Plain or sesame topped. Great for sandwiches.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan</span></div>
+          </div>
+          <span class="item-price">£2.20</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PASTRIES -->
+    <div class="menu-category" id="pastries">
+      <div class="category-header">
+        <div class="category-icon">🥐</div>
+        <div>
+          <h2>Pastries</h2>
+          <p>Buttery, flaky, and best enjoyed while still warm.</p>
+        </div>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&q=80" alt="Croissant" />
+          <div class="item-info">
+            <h3>Butter Croissant</h3>
+            <p>Laminated with Scottish butter. Flaky, golden, and light.</p>
+            <div class="item-tags"><span class="item-tag">Classic</span></div>
+          </div>
+          <span class="item-price">£2.20</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=200&q=80" alt="Pain au Chocolat" />
+          <div class="item-info">
+            <h3>Pain au Chocolat</h3>
+            <p>Two dark chocolate batons in buttery pastry. Crowd favourite every time.</p>
+            <div class="item-tags"><span class="item-tag">Chocolate</span></div>
+          </div>
+          <span class="item-price">£2.60</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=200&q=80" alt="Cinnamon Roll" />
+          <div class="item-info">
+            <h3>Cinnamon Roll</h3>
+            <p>Soft dough, cinnamon sugar filling, cream cheese glaze. Made fresh each morning.</p>
+            <div class="item-tags"><span class="item-tag">Seasonal</span></div>
+          </div>
+          <span class="item-price">£3.00</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=200&q=80" alt="Danish Pastry" />
+          <div class="item-info">
+            <h3>Danish Pastry</h3>
+            <p>Rotating seasonal filling apricot, raspberry, or almond. Ask at the counter.</p>
+            <div class="item-tags"><span class="item-tag">Seasonal</span></div>
+          </div>
+          <span class="item-price">£2.80</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1637087788449-222cf1da072a?w=400&q=80" alt="Muffin" />
+          <div class="item-info">
+            <h3>Blueberry Muffin</h3>
+            <p>Moist, generously filled with fresh blueberries and a crunchy sugar top.</p>
+            <div class="item-tags"><span class="item-tag vegan">Vegan option</span></div>
+          </div>
+          <span class="item-price">£2.50</span>
+        </div>
+
+        <div class="menu-item">
+          <img class="item-img" src="https://images.unsplash.com/photo-1609501676873-b2a6a181ef05?w=400&q=80" alt="Scone" />
+          <div class="item-info">
+            <h3>Plain or Fruit Scone</h3>
+            <p>Served with clotted cream and jam. A Scottish classic the proper way.</p>
+            <div class="item-tags"><span class="item-tag">Scottish</span></div>
+          </div>
+          <span class="item-price">£2.00</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CAKES -->
+    <div class="menu-category" id="cakes">
+      <div class="category-header">
+        <div class="category-icon">🎂</div>
+        <div>
+          <h2>Cakes &amp; Specials</h2>
+          <p>Celebration cakes made to order and whole cakes available daily in-store.</p>
+        </div>
+      </div>
+      <div class="specials-note">
+        <i class="fa fa-info-circle" style="color:var(--brown);"></i>
+        &nbsp; <strong>Custom orders:</strong> We can make almost any celebration cake with 48 hours' notice.
+        <a href="contact.html" style="color:var(--red);font-weight:bold;">Get in touch →</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th style="white-space:nowrap;">Price</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Victoria Sponge</strong></td>
+            <td>Vanilla sponge, strawberry jam, fresh cream</td>
+            <td>£18.00</td>
+            <td>8 inch</td>
+          </tr>
+          <tr>
+            <td><strong>Chocolate Fudge Cake</strong></td>
+            <td>Three layers of dark chocolate sponge, ganache icing</td>
+            <td>£22.00</td>
+            <td>8 inch</td>
+          </tr>
+          <tr>
+            <td><strong>Carrot Cake</strong></td>
+            <td>Spiced sponge, walnut pieces, cream cheese frosting</td>
+            <td>£20.00</td>
+            <td>8 inch</td>
+          </tr>
+          <tr>
+            <td><strong>Lemon Drizzle Cake</strong></td>
+            <td>Tangy lemon sponge with a crunchy sugar drizzle</td>
+            <td>£18.00</td>
+            <td>8 inch</td>
+          </tr>
+          <tr>
+            <td><strong>Celebration Cake (Custom)</strong></td>
+            <td>Your choice of flavour, design, and message. 48h notice required.</td>
+            <td>From £28</td>
+            <td>Various</td>
+          </tr>
+          <tr>
+            <td><strong>Cupcakes (box of 6)</strong></td>
+            <td>Mixed flavours or single flavour. Ask about seasonal options.</td>
+            <td>£12.00</td>
+            <td>6 pcs</td>
+          </tr>
+          <tr>
+            <td><strong>Brownie</strong></td>
+            <td>Fudgy dark chocolate. Walnuts optional.</td>
+            <td>£2.50</td>
+            <td>Single</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-category" id="drinks">
+      <div class="category-header">
+        <div class="category-icon">☕</div>
+        <div>
+          <h2>Drinks</h2>
+          <p>Simple, quality coffee and tea to enjoy in-store or take away.</p>
+        </div>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-item">
+          <div class="item-info">
+            <h3>Flat White</h3>
+            <p>Double espresso, microfoamed Scottish whole milk.</p>
+          </div>
+          <span class="item-price">£3.00</span>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-info">
+            <h3>Cappuccino</h3>
+            <p>Espresso, steamed milk, thick foam. Chocolate dusted.</p>
+          </div>
+          <span class="item-price">£3.20</span>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-info">
+            <h3>Americano</h3>
+            <p>Two shots of espresso with hot water. Bold and simple.</p>
+          </div>
+          <span class="item-price">£2.50</span>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-info">
+            <h3>English Breakfast Tea</h3>
+            <p>Scottish Brew loose leaf, served in a proper pot. Milk on the side.</p>
+          </div>
+          <span class="item-price">£2.00</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ALLERGEN -->
+    <div class="allergen-box">
+      <h4><i class="fa fa-triangle-exclamation"></i> &nbsp; Allergen Information</h4>
+      <p>Our products are made in a kitchen that handles <strong>gluten, dairy, eggs, tree nuts, and soy</strong>.
+      We cannot guarantee any product is completely free from allergens. Please speak to a member of staff if you have a specific allergy or dietary requirement. Items marked <strong>GF</strong> use gluten-free ingredients but are not produced in a dedicated gluten-free environment.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sweet Crumbs Bakery</h4>
+        <p>Fresh baked every morning.<br>Made with love, served with pride.</p>
+        <div style="margin-top:1rem;display:flex;gap:0.7rem;">
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-facebook"></i></a>
+          <a href="#" style="color:#aaa;font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <address>
+          12 Baker Street<br>Edinburgh, EH1 1AB<br><br>
+          <i class="fa fa-phone"></i> &nbsp;0131 456 7890<br>
+          <i class="fa fa-envelope"></i> &nbsp;hello@sweetcrumbs.co.uk
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon – Fri: &nbsp;7:00am – 6:00pm<br>
+           Saturday: &nbsp;8:00am – 5:00pm<br>
+           Sunday: &nbsp;&nbsp;&nbsp;9:00am – 2:00pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sweet Crumbs Bakery. All rights reserved.</div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
